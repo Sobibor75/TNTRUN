@@ -13,9 +13,9 @@ public enum Status {
     GAME("Игра", 300, user -> {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(App.getInstance(), () ->
                 Bukkit.getOnlinePlayers().stream()
-                .filter(player -> !player.getGameMode().equals(GameMode.SPECTATOR))
-                .forEach(player -> player.getLocation().subtract(0, 1, 0)
-                        .getBlock().setType(Material.AIR)), 20, 20);
+                        .filter(player -> !player.getGameMode().equals(GameMode.SPECTATOR))
+                        .forEach(player -> player.getLocation().subtract(0, 1, 0)
+                                .getBlock().setType(Material.AIR)), 20, 20);
     }),
     END("Конец", 310, user -> {
 
@@ -23,7 +23,7 @@ public enum Status {
 
     private final String name;
     private final int time;
-    private Consumer<User> consumer;
+    private final Consumer<User> consumer;
 
 
     Status(String name, int time, Consumer<User> consumer) {
@@ -36,12 +36,12 @@ public enum Status {
         return consumer;
     }
 
-    public void setConsumer(Consumer<User> consumer) {
-        this.consumer = consumer;
-    }
-
     public int getTime() {
         return time;
+    }
+
+    public Status getNext() {
+        return ordinal() >= Status.values().length - 1 ? null : Status.values()[ordinal() + 1];
     }
 
     public String getName() {
