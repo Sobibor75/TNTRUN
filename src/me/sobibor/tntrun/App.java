@@ -1,13 +1,12 @@
 package me.sobibor.tntrun;
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
+import me.sobibor.tntrun.state.Timer;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class App extends JavaPlugin implements Listener{
+public class App extends JavaPlugin {
     @Override
-    public void onEnable(){
-        Bukkit.getPluginManager().registerEvents(this,this);
-    }
+    public void onEnable() {
+        new Timer(this).runTaskTimer(this, 20, 20);
 
+    }
 }
