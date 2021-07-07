@@ -17,11 +17,11 @@ public class UserInfo {
         return wins;
     }
 
-    public int setMoney(int money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    public int setWins(int wins) {
+    public void setWins(int wins) {
       this.wins = wins;
     }
 }

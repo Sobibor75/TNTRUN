@@ -20,8 +20,12 @@ public class Timer extends BukkitRunnable {
         if (Bukkit.getOnlinePlayers().size() >= 1)
             time.getAndIncrement();
 
+        System.out.println(gameStatus);
+
        if(time.get() == gameStatus.getTime()) {
-           gameStatus.
+           Bukkit.getOnlinePlayers(
+                   .forEach(player -> gameStatus.getConsumer().accept(App.getInstance().getUser().get(player.getUniqueId())));
+;
        }
     }
 }

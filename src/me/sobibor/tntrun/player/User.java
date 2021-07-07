@@ -17,7 +17,7 @@ public class User {
         return player;
     }
 
-    public Player setPlayer(Player player) {
+    public void setPlayer(Player player) {
         if (player != null)
             this.player = player;
     }
