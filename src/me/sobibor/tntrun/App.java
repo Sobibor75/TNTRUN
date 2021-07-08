@@ -47,4 +47,5 @@ public class App extends JavaPlugin {
     public void setStatus(Status status) {
         this.status = status;
     }
+
 }
