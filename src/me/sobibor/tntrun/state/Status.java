@@ -30,7 +30,7 @@ public enum Status {
                         // Здесь сделай начисление побед
 
                         // Сообщение в общий чат и перезагрузка сервера
-                        Bukkit.broadcastMessage("Победитель " + Bukkit.getPlayer(uuid).getName() + " !\nСервер будет перезагружен.");
+                        Bukkit.broadcastMessage("Победитель " + Bukkit.getPlayer(uuid) + " !\nСервер будет перезагружен.");
                         Bukkit.reload();
                     });
         }
