@@ -17,7 +17,6 @@ public class Timer extends BukkitRunnable {
     }
 
 
-
     @Override
     public void run() {
         // Если игрок >= 1, то увеличиваем игровой таймер.
@@ -35,15 +34,6 @@ public class Timer extends BukkitRunnable {
                             app.getStatus().getConsumer().accept(app.getUser().get(player.getUniqueId()));
                     });
         }
-
-        if(app.getLivePlayers().size() == 1) {
-           app.getLivePlayers().stream().forEach(uuid ->{app.getUser().get(uuid);});
-            {
-                
-            }
-
-        }
     }
-
 }
 

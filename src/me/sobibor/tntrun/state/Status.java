@@ -2,10 +2,14 @@ package me.sobibor.tntrun.state;
 
 import me.sobibor.tntrun.App;
 import me.sobibor.tntrun.player.User;
+import me.sobibor.tntrun.player.UserInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
+import java.util.Map;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 public enum Status {
@@ -18,7 +22,18 @@ public enum Status {
                                 .getBlock().setType(Material.AIR)), 20, 20);
     }),
     END("Конец", 310, user -> {
+        if (App.getInstance().getLivePlayers().size() == 1) {
+            App.getInstance().getLivePlayers()
+                    .forEach(uuid -> {
+                        UserInfo userStatistic = App.getInstance().getUser().get(uuid).getUserInfo();
+                        userStatistic.setMoney(userStatistic.getMoney() + 100);
+                        // Здесь сделай начисление побед
 
+                        // Сообщение в общий чат и перезагрузка сервера
+                        Bukkit.broadcastMessage("Победитель " + Bukkit.getPlayer(uuid) + " !\nСервер будет перезагружен.");
+                        Bukkit.reload();
+                    });
+        }
     });
 
 
