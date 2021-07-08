@@ -6,10 +6,7 @@ import me.sobibor.tntrun.player.UserInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
-import java.util.Map;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public enum Status {
@@ -27,8 +24,9 @@ public enum Status {
                     .forEach(uuid -> {
                         UserInfo userStatistic = App.getInstance().getUser().get(uuid).getUserInfo();
                         userStatistic.setMoney(userStatistic.getMoney() + 100);
-                        // Здесь сделай начисление побед
-
+                        // Начисление монет
+                        UserInfo userStatistc = App.getInstance().getUser().get(uuid).getUserInfo();
+                        userStatistic.setWins(userStatistic.getWins() + 1);
                         // Сообщение в общий чат и перезагрузка сервера
                         Bukkit.broadcastMessage("Победитель " + Bukkit.getPlayer(uuid) + " !\nСервер будет перезагружен.");
                         Bukkit.reload();
