@@ -21,6 +21,7 @@ public enum Status {
 
     });
 
+
     private final String name;
     private final int time;
     private final Consumer<User> consumer;
@@ -47,4 +48,6 @@ public enum Status {
     public String getName() {
         return name;
     }
+
+
 }

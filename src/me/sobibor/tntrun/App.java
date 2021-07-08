@@ -8,6 +8,7 @@ import me.sobibor.tntrun.state.Timer;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,6 +17,9 @@ public class App extends JavaPlugin {
 
     private final Map<UUID, User> user = Maps.newHashMap();
     private Status status;
+
+    private final ArrayList<UUID> livePlayers = new ArrayList();
+
 
     @Override
     public void onEnable() {
@@ -47,5 +51,10 @@ public class App extends JavaPlugin {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public  ArrayList<UUID> getPlayers() {
+        return livePlayers;
+    }
+    
 
 }
