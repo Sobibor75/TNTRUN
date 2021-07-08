@@ -27,7 +27,7 @@ public class PlayerJoinEvent implements Listener {
         app.getLivePlayers().add(e.getPlayer().getUniqueId());
     }
 
-    //удаляю игрока с сервера
+
     public void onQuit(org.bukkit.event.player.PlayerQuitEvent e) {
         app.getLivePlayers().remove(e.getPlayer().getUniqueId());
     }

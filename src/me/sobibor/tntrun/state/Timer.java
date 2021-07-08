@@ -11,9 +11,12 @@ public class Timer extends BukkitRunnable {
     private final AtomicInteger time = new AtomicInteger(0);
     private final App app;
 
+
     public Timer(App app) {
         this.app = app;
     }
+
+
 
     @Override
     public void run() {
@@ -32,5 +35,15 @@ public class Timer extends BukkitRunnable {
                             app.getStatus().getConsumer().accept(app.getUser().get(player.getUniqueId()));
                     });
         }
+
+        if(app.getLivePlayers().size() == 1) {
+           app.getLivePlayers().stream().forEach(uuid ->{app.getUser().get(uuid);});
+            {
+                
+            }
+
+        }
     }
+
 }
+
