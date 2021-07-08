@@ -9,23 +9,28 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerJoinEvent implements Listener {
+    private final App app;
 
+    public PlayerJoinEvent(App app) {
+        this.app = app;
+    }
 
     @EventHandler
     public void onJoin(org.bukkit.event.player.PlayerJoinEvent e) {
         // Добавляю игрока в мапу
-        App.getInstance().getUser().put(
+        app.getUser().put(
                 e.getPlayer().getUniqueId(),
                 new User(new UserInfo(0, 0))
         );
+
         //добавляю игрока на сервера
-        App.getInstance().getPlayers().add(e.getPlayer().getUniqueId());
-    }
-//удадляю игрока с сервера
-    public void onQuit(org.bukkit.event.player.PlayerQuitEvent e) {
-        App.getInstance().getPlayers().remove(e.getPlayer().getUniqueId());
+        app.getLivePlayers().add(e.getPlayer().getUniqueId());
     }
 
+    //удаляю игрока с сервера
+    public void onQuit(org.bukkit.event.player.PlayerQuitEvent e) {
+        app.getLivePlayers().remove(e.getPlayer().getUniqueId());
+    }
 
 
     @EventHandler

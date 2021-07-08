@@ -3,7 +3,7 @@ package me.sobibor.tntrun.player;
 import org.bukkit.entity.Player;
 
 public class User {
-    private UserInfo userInfo;
+    private final UserInfo userInfo;
     private Player player;
 
 

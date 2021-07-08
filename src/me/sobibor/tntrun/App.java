@@ -16,18 +16,17 @@ public class App extends JavaPlugin {
     private static App instance;
 
     private final Map<UUID, User> user = Maps.newHashMap();
+    private final ArrayList<UUID> livePlayers = new ArrayList<>();
     private Status status;
-
-    private final ArrayList<UUID> livePlayers = new ArrayList();
-
 
     @Override
     public void onEnable() {
         instance = this;
 
         // Регистрация листенеров
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinEvent(this), this);
 
+        // Ставлю статус ожидания игры
         setStatus(Status.WAITING);
 
         // Регистрация игрового таймера
@@ -52,9 +51,7 @@ public class App extends JavaPlugin {
         this.status = status;
     }
 
-    public  ArrayList<UUID> getPlayers() {
+    public  ArrayList<UUID> getLivePlayers() {
         return livePlayers;
     }
-    
-
 }
