@@ -25,7 +25,7 @@ public enum Status {
                         UserInfo userStatistic = App.getInstance().getUser().get(uuid).getUserInfo();
                         userStatistic.setMoney(userStatistic.getMoney() + 100);
                         // Начисление монет
-                        UserInfo userStatistc = App.getInstance().getUser().get(uuid).getUserInfo();
+                        userStatistic = App.getInstance().getUser().get(uuid).getUserInfo();
                         userStatistic.setWins(userStatistic.getWins() + 1);
                         // Сообщение в общий чат и перезагрузка сервера
                         Bukkit.broadcastMessage("Победитель " + Bukkit.getPlayer(uuid) + " !\nСервер будет перезагружен.");
