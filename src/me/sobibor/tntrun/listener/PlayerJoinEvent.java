@@ -4,11 +4,13 @@ import me.sobibor.tntrun.App;
 import me.sobibor.tntrun.player.User;
 import me.sobibor.tntrun.player.UserInfo;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerJoinEvent implements Listener {
@@ -31,11 +33,13 @@ public class PlayerJoinEvent implements Listener {
         // убрал сообщения при входе нна сервер
         e.setJoinMessage(null);
     }
-//убрал урон от падения
+
+    //убрал урон от падения
     public void fallDamage(EntityDamageByEntityEvent e) {
         e.setCancelled(true);
     }
-//убрал файты
+
+    //убрал файты
     public void damageEntity(EntityDamageEvent e) {
         e.setCancelled(true);
     }
@@ -44,6 +48,11 @@ public class PlayerJoinEvent implements Listener {
         app.getLivePlayers().remove(e.getPlayer().getUniqueId());
     }
 
+    public void slimeJump(PlayerInteractEvent e) {
+        if(e.getPlayer().getItemInHand().equals(Material.SLIME_BALL)) {
+            e.getPlayer().getLocation().clone().add(0,4,0).multiply(1);
+        }
+    }
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
