@@ -1,5 +1,6 @@
 package me.sobibor.tntrun.listener;
 
+import com.google.common.collect.Maps;
 import me.sobibor.tntrun.App;
 import me.sobibor.tntrun.player.User;
 import me.sobibor.tntrun.player.UserInfo;
@@ -12,6 +13,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class PlayerJoinEvent implements Listener {
     private final App app;
@@ -53,6 +58,22 @@ public class PlayerJoinEvent implements Listener {
             e.getPlayer().getLocation().clone().add(0,4,0).multiply(1);
         }
     }
+
+    private static final Map<UUID, Long> slimeCD = Maps.newHashMap();
+
+    public boolean hasCountdown(UUID user) {
+        Long data = slimeCD.get(user);
+        return data != null && data > System.currentTimeMillis();
+    }
+
+    public void setCountdown(UUID user, int val) {
+        slimeCD.put(user, System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(val));
+    }
+
+    public long getSecondsLeft(UUID user) {
+        return TimeUnit.SECONDS.toSeconds(slimeCD.get(user) - System.currentTimeMillis());
+    }
+
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
