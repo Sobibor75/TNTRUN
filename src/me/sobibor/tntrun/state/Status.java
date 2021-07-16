@@ -20,15 +20,14 @@ public enum Status {
     }),
     END("Конец", 310, user -> {
         if (App.getInstance().getLivePlayers().size() == 1) {
-            App.getInstance().getLivePlayers()
-                    .forEach(uuid -> {
-                        UserInfo userStatistic = App.getInstance().getUser().get(uuid).getUserInfo();
-                        userStatistic.setMoney(userStatistic.getMoney() + 100);
-                        // Начисление монет
-                        userStatistic = App.getInstance().getUser().get(uuid).getUserInfo();
-                        userStatistic.setWins(userStatistic.getWins() + 1);
+            App.getInstance().getLivePlayers().stream()
+                    .map(uuid -> App.getInstance().getUser().get(uuid))
+                    .forEach(userStatistic -> {
+                        userStatistic.getUserInfo().setMoney(userStatistic.getUserInfo().getMoney() + 100);
+                        userStatistic.getUserInfo().setWins(userStatistic.getUserInfo().getWins() + 1);
+
                         // Сообщение в общий чат и перезагрузка сервера
-                        Bukkit.broadcastMessage("Победитель " + Bukkit.getPlayer(uuid) + " !\nСервер будет перезагружен.");
+                        Bukkit.broadcastMessage("Победитель " + user.getPlayer().getName() + " !\nСервер будет перезагружен.");
                         Bukkit.reload();
                     });
         }
@@ -38,7 +37,6 @@ public enum Status {
     private final String name;
     private final int time;
     private final Consumer<User> consumer;
-
 
     Status(String name, int time, Consumer<User> consumer) {
         this.name = name;
