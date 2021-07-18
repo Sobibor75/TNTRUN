@@ -17,5 +17,11 @@ public class PlayerInteractEvent implements Listener {
 
         if (player.getItemInHand().getType().equals(Material.SLIME_BALL))
             player.getLocation().clone().add(0, 4, 0).multiply(1);
+
+        if (DelaUtil.hasCountdown(Material.SLIME_BALL)) {
+            player.sendMessage("до следующего использавания осталось ") +
+                    DelaUtil.getSecondsLeft(Material.SLIME_BALL) + "секундю";
+        }
     }
-}
+    }
+
